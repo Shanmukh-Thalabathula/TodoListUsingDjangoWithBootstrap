@@ -1,0 +1,41 @@
+{% extends 'master.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<div class="container">
+    {% if tasks %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>List of tasks</th>
+                <th>Created</th>
+                <th>Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{task.task}}</td>
+                <td>{{task.created | timesince}}</td>
+                <td>{{task.updated | timesince}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+
+    <div class="container">
+        <h2>Start adding your tasks now...</h2>
+    </div>
+
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %} 

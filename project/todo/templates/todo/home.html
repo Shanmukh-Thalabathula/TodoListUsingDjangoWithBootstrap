@@ -1,0 +1,53 @@
+{% extends 'master.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<div class="container">
+    {% if tasks %}
+
+    <table class="table  table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>S.No</th>
+                <th>List of tasks</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for task in tasks %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{task.task}}</td>
+                <td><a href="{% url 'update' task.id %}" class="btn btn-warning">Update</a></td>
+                <td><a href="{% url 'delete' task.id %}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+
+    <div class="container">
+        <h2>Start adding your tasks now...</h2>
+    </div>
+
+    {% endif %}
+</div>
+{% else %}
+
+<div class="container">
+    <h2>Are you forgetting necessary tasks in your daily life?</h2>
+    <p>
+    Remembering tasks to complete is essential for effective time management and productivity. It ensures that responsibilities are prioritized, deadlines are met, and goals are achieved. Forgetting tasks can lead to missed opportunities, increased stress, and diminished efficiency, especially when juggling multiple commitments. By staying organized and maintaining a clear focus on tasks, individuals can work more efficiently, reduce the risk of errors, and enhance their overall performance. Tools like to-do lists, reminders, and calendars can help in keeping track of tasks, enabling smoother progress and a more balanced workflow.
+    </p>
+    <h4>what are you waiting for?</h4>
+    <p>Create your own account and start your <b>ToDo List</b> so that you don't forget any more.</p>
+</div>
+
+{% endif %}
+{% endblock %} 
